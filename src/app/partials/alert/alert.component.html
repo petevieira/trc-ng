@@ -1,0 +1,27 @@
+
+<div *ngIf="showAlert"
+    [ngClass]="alertType === AlertType.Success
+        ? 'bg-teal-100 border-teal-500 text-teal-900' : (alertType === AlertType.Error
+        ? 'bg-red-100 border-red-500 text-red-900'
+        : 'bg-blue-100 border-blue-500 text-blue-900')"
+    class="fixed top-5 left-1/2 -translate-x-1/2 min-w-[90%] md:min-w-96 border-t-4 rounded-b px-4 py-3 shadow-md" role="alert">
+    <div class="flex mr-6">
+        <div class="py-1 pr-4 font-bold text-2xl">
+            <div *ngIf="alertType === AlertType.Success">✓</div>
+            <div *ngIf="alertType === AlertType.Error">{{'\u26a0'}}</div>
+            <div *ngIf="alertType === AlertType.Info">{{'\u24d8'}}</div>
+        </div>
+        <div>
+            <p class="font-bold text-lg">{{ header }}</p>
+            <p class="text-md" [innerHTML]="additionalText"></p>
+        </div>
+    </div>
+    <!-- Close button at top right -->
+    <button (click)="closeAlert()" class="absolute top-0 right-0 px-2 pt-2">
+        <svg class="fill-current h-6 w-6" [ngClass]="{'text-red-500': alertType === AlertType.Error, 'text-teal-500': alertType === AlertType.Success, 'text-blue-500': alertType === AlertType.Info}" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <title>Close</title>
+            <path
+                d="M14.348 14.849a1 1 0 0 1-1.414 1.414l-3.535-3.536-3.536 3.536a1 1 0 1 1-1.414-1.414l3.536-3.535-3.536-3.536a1 1 0 1 1 1.414-1.414l3.536 3.536 3.535-3.536a1 1 0 1 1 1.414 1.414l-3.536 3.536 3.536 3.535z" />
+        </svg>
+    </button>
+</div>
