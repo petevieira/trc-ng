@@ -12,14 +12,18 @@ import { AlertService } from 'app/services/alert.service';
 import { Api } from 'app/consts/api.consts';
 import { TranslateService } from '@ngx-translate/core';
 import { FooterComponent } from './partials/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     imports: [
         RouterOutlet, LoaderComponent,
-        NavbarComponent, AlertComponent, HttpClientModule
+        NavbarComponent, AlertComponent, 
+// TODO: `HttpClientModule` should not be imported into a component directly.
+// Please refactor the code to add `provideHttpClient()` call to the provider list in the
+// application bootstrap logic and remove the `HttpClientModule` import from this component.
+HttpClientModule
     ],
     templateUrl: './app.component.html',
 })
