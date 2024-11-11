@@ -1,9 +1,14 @@
-<div class="dark:bg-gray-900 dark:text-neutral-200">
-    <app-navbar></app-navbar>
-    <div class="min-h-screen">
+<div class="flex flex-col min-h-screen dark:bg-gray-900 dark:text-neutral-200">
+    <!-- Fixed Navbar at the top -->
+    <app-navbar class="sticky top-0 z-10"></app-navbar>
+
+    <!-- Scrollable content section -->
+    <div class="flex-1 overflow-y-auto w-full mx-auto px-10">
         <router-outlet></router-outlet>
+        <app-alert></app-alert>
+        <app-loader></app-loader>
     </div>
-    <app-alert></app-alert>
-    <app-loader></app-loader>
-    <!-- <app-footer></app-footer> -->
+
+    <!-- Fixed Bottom Tabs at the bottom -->
+    <app-bottom-tabs class="sticky bottom-0 z-10"></app-bottom-tabs>
 </div>

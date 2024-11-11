@@ -1,12 +1,14 @@
 import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { filter, map, mergeMap } from 'rxjs/operators';
+// import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [CommonModule, RouterModule, TranslateModule],
+    imports: [CommonModule, RouterModule],
     templateUrl: './navbar.component.html',
 })
 export class NavbarComponent implements AfterViewInit {
@@ -14,10 +16,9 @@ export class NavbarComponent implements AfterViewInit {
     showAboutMenu: boolean = false;
     showLanguageMenu: boolean = false;
     numItemsInCart: number = 0;
-    @ViewChild('collapsableSearchBar') collapsableSearchBar!: ElementRef;
+    pageTitle: string = 'Home';
     @ViewChild('mobileNav') mobileNav!: ElementRef;
     @ViewChild('menuButton') menuButton!: ElementRef;
-    @ViewChild('soloSearchIcon') searchIcon!: ElementRef;
     @ViewChild('aboutMenu') aboutMenu!: ElementRef;
     @ViewChild('languageMenu') languageMenu!: ElementRef;
     i18nLanguages = [
@@ -67,11 +68,26 @@ export class NavbarComponent implements AfterViewInit {
 
     constructor(
         private renderer: Renderer2,
-        private translate: TranslateService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute
+        // private translate: TranslateService,
     ) {}
 
-    ngOnInit() {
-        // console.debug("token: ", this.authService.getAccessToken());
+    ngOnInit(): void {
+        // Listen for navigation end events and retrieve the title from the route data
+        this.router.events.pipe(
+            filter(event => event instanceof NavigationEnd),
+            map(() => this.activatedRoute),
+            map(route => {
+                while (route.firstChild) {
+                    route = route.firstChild;
+                }
+                return route;
+            }),
+            mergeMap(route => route.data)
+        ).subscribe(data => {
+            this.pageTitle = data['title'] || 'Default Title'; // Set a default title if none is provided
+        });
     }
 
     ngAfterViewInit() {
@@ -89,7 +105,6 @@ export class NavbarComponent implements AfterViewInit {
     clickOutsideMobileMenu(event: any): boolean {
         return !this.mobileNav.nativeElement.contains(event.target)
         && !this.menuButton.nativeElement.contains(event.target)
-        && !this.searchIcon.nativeElement.contains(event.target)
     }
 
     clickOutsideAboutMenu(event: any): boolean {
@@ -105,7 +120,7 @@ export class NavbarComponent implements AfterViewInit {
     }
 
     switchLanguage(languageCode: string) {
-        this.translate.use(languageCode);
+        // this.translate.use(languageCode);
     }
 
     toggleMenu() {
@@ -114,16 +129,5 @@ export class NavbarComponent implements AfterViewInit {
 
     toggleAboutMenu() {
         this.showAboutMenu = !this.showAboutMenu;
-    }
-
-    openSearchBar() {
-        this.showMenu = !this.showMenu;
-        if (this.showMenu) {
-            setTimeout(() => {
-                this.collapsableSearchBar.nativeElement.focus();
-            }, 100);
-        } else {
-            this.collapsableSearchBar.nativeElement.blur();
-        }
     }
 }

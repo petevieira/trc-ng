@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">TRC App</string>
+    <string name="title_activity_main">TRC App</string>
+    <string name="package_name">app.tucsonrepaircafe.org</string>
+    <string name="custom_url_scheme">app.tucsonrepaircafe.org</string>
+</resources>

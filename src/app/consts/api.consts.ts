@@ -2,41 +2,42 @@ import { environment } from "environments/environment";
 
 export class Api {
     public static API_ROOT = 'http://localhost:3000/api';
-    static BOOKS = 'books';
-    static CHECKOUT = 'checkout';
-    static LANGUAGES = 'languages';
     static USERS = 'users';
+    static ITEMS = 'items';
+    static VOLUNTEERS = 'volunteers';
+    static TEXT = 'text';
 
-    public static Books = {
-        GET_BOOK_METADATA:         `${Api.API_ROOT}/${Api.BOOKS}/get-book-metadata`,
-        GET_ALL_BOOKS_METADATA:    `${Api.API_ROOT}/${Api.BOOKS}/get-all-books-metadata`,
-        GENERATE_CUSTOM_BOOK:      `${Api.API_ROOT}/${Api.BOOKS}/generate-custom-book`,
-        GENERATE_BOOK_SAMPLE:      `${Api.API_ROOT}/${Api.BOOKS}/generate-book-sample`,
-        DOWNLOAD_EBOOK:            `${Api.API_ROOT}/${Api.BOOKS}/download-ebook`,
-    }
-
-    public static Checkout = {
-        CREATE_CHECKOUT_SESSION:   `${Api.API_ROOT}/${Api.CHECKOUT}/create-checkout-session`,
-        GET_CHECKOUT_STATUS:       `${Api.API_ROOT}/${Api.CHECKOUT}/get-checkout-status`,
-        GENERATE_EBOOK:            `${Api.API_ROOT}/${Api.CHECKOUT}/generate-ebook`,
-    }
-
-    public static Languages = {
-        GET_LANGUAGES_FROM_CODES:  `${Api.API_ROOT}/${Api.LANGUAGES}/get-languages-from-codes`,
+    public static Root = {
+        HEALTH_CHECK:               `${Api.API_ROOT}/`,
     }
 
     public static Users = {
-        SIGN_IN:                   `${Api.API_ROOT}/${Api.USERS}/sign-in`,
-        SIGN_UP:                   `${Api.API_ROOT}/${Api.USERS}/sign-up`,
-        VERIFY_EMAIL:              `${Api.API_ROOT}/${Api.USERS}/verify-email`,
-        GET_ACCESS_TOKEN:          `${Api.API_ROOT}/${Api.USERS}/get-access-token`,
-        LOG_OUT:                   `${Api.API_ROOT}/${Api.USERS}/log-out`,
-        GET_CART:                  `${Api.API_ROOT}/${Api.USERS}/get-cart`,
-        GET_CART_WITH_DETAILS:     `${Api.API_ROOT}/${Api.USERS}/get-cart-with-details`,
-        GET_CART_COUNT:            `${Api.API_ROOT}/${Api.USERS}/get-cart-count`,
-        ADD_ITEM_TO_CART:          `${Api.API_ROOT}/${Api.USERS}/add-item-to-cart`,
-        REMOVE_ITEM_FROM_CART:     `${Api.API_ROOT}/${Api.USERS}/remove-item-from-cart`,
-        UPDATE_CART_ITEM:          `${Api.API_ROOT}/${Api.USERS}/update-cart-item`,
-        SEND_CONTACT_MESSAGE:      `${Api.API_ROOT}/${Api.USERS}/send-contact-message`,
+        USER_IS_ADMIN:          `${Api.API_ROOT}/${Api.USERS}/user-is-admin`,
+        SIGN_IN_ADMIN:          `${Api.API_ROOT}/${Api.USERS}/sign-in-admin`,
+        ADMIN_IS_SIGNED_IN:     `${Api.API_ROOT}/${Api.USERS}/admin-is-signed-in`,
+    }
+
+    public static Items = {
+        ADD_BASIC_ITEM:          `${Api.API_ROOT}/${Api.ITEMS}/add-basic-item`,
+        ADD_FULL_ITEM:           `${Api.API_ROOT}/${Api.ITEMS}/add-full-item`,
+        DELETE_ITEM:             `${Api.API_ROOT}/${Api.ITEMS}/delete-item`,
+        UPDATE_ITEM:             `${Api.API_ROOT}/${Api.ITEMS}/update-item`,
+        GET_ITEM:                `${Api.API_ROOT}/${Api.ITEMS}/get-item`,
+        GET_ITEMS_BASIC:         `${Api.API_ROOT}/${Api.ITEMS}/get-items-basic`,
+        FIND_OWNER_BY_EMAIL:     `${Api.API_ROOT}/${Api.ITEMS}/find-owner-by-email`,
+    }
+
+    public static Volunteers = {
+        ADD_VOLUNTEER:           `${Api.API_ROOT}/${Api.VOLUNTEERS}/add-volunteer`,
+        GET_VOLUNTEER:           `${Api.API_ROOT}/${Api.VOLUNTEERS}/get-volunteer`,
+        DELETE_VOLUNTEER:        `${Api.API_ROOT}/${Api.VOLUNTEERS}/delete-volunteer`,
+        UPDATE_VOLUNTEER:        `${Api.API_ROOT}/${Api.VOLUNTEERS}/update-volunteer`,
+        GET_DAYS_VOLUNTEERS:     `${Api.API_ROOT}/${Api.VOLUNTEERS}/get-days-volunteers`,
+        GET_PAST_VOLUNTEERS:     `${Api.API_ROOT}/${Api.VOLUNTEERS}/get-past-volunteers`,
+        FIND_VOLUNTEER_BY_EMAIL: `${Api.API_ROOT}/${Api.VOLUNTEERS}/find-volunteer-by-email`,
+    }
+
+    public static Text = {
+        GET_TEXT:                `${Api.API_ROOT}/${Api.TEXT}/get-text`,
     }
 }
